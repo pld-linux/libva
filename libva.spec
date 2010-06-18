@@ -1,13 +1,13 @@
 Summary:	VAAPI (Video Acceleration API)
 Name:		libva
 # see configure.ac
-Version:	0.31
+Version:	1.0.3
 Release:	1
 License:	BSD
 Group:		Libraries
 # git clone git://anongit.freedesktop.org/git/libva
-Source0:	%{name}-20091120.tar.bz2
-# Source0-md5:	4ed2e4e6f1293f1405a847f17a42c9fa
+Source0:	http://cgit.freedesktop.org/libva/snapshot/%{name}-%{version}.tar.bz2
+# Source0-md5:	5e92b34ec7047479993ac5b02a16491c
 URL:		http://www.freedesktop.org/wiki/Software/vaapi
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -36,7 +36,7 @@ Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 Static libva library.
 
 %prep
-%setup -q -n %{name}
+%setup -q
 
 %build
 ./autogen.sh
@@ -54,6 +54,9 @@ install -d $RPM_BUILD_ROOT%{_bindir}
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+rm $RPM_BUILD_ROOT%{_libdir}/%{name}/dri/*.{a,la}
+rm $RPM_BUILD_ROOT%{_bindir}/test_*
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -62,6 +65,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/h264encode
+%attr(755,root,root) %{_bindir}/mpeg2vldemo
+%attr(755,root,root) %{_bindir}/putsurface
 %attr(755,root,root) %{_bindir}/vainfo
 %attr(755,root,root) %{_libdir}/libva*.so.*.*
 %attr(755,root,root) %ghost %{_libdir}/libva*.so.1
