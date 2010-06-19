@@ -1,3 +1,6 @@
+# TODO:
+#	add missing BR
+#
 Summary:	VAAPI (Video Acceleration API)
 Name:		libva
 # see configure.ac
