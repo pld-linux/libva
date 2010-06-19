@@ -11,6 +11,7 @@ Source0:	http://cgit.freedesktop.org/libva/snapshot/%{name}-%{version}.tar.bz2
 URL:		http://www.freedesktop.org/wiki/Software/vaapi
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	libdrm-devel >= 2.4.21
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
