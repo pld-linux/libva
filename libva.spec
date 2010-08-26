@@ -1,20 +1,20 @@
-# TODO:
-#	add missing BR
-#
 Summary:	VAAPI (Video Acceleration API)
 Name:		libva
-# see configure.ac
-Version:	1.0.3
+Version:	1.0.4
 Release:	1
 License:	BSD
 Group:		Libraries
 # git clone git://anongit.freedesktop.org/git/libva
 Source0:	http://cgit.freedesktop.org/libva/snapshot/%{name}-%{version}.tar.bz2
-# Source0-md5:	5e92b34ec7047479993ac5b02a16491c
+# Source0-md5:	3a16a9339dcc3c27234ba9f28fb38a63
 URL:		http://www.freedesktop.org/wiki/Software/vaapi
+BuildRequires:	Mesa-libGL-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libdrm-devel >= 2.4.21
+BuildRequires:	libtool
+BuildRequires:	pkgconfig
+BuildRequires:	xorg-lib-libXfixes-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
