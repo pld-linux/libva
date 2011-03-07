@@ -1,14 +1,14 @@
 Summary:	VAAPI (Video Acceleration API)
 Summary(pl.UTF-8):	VAAPI (Video Acceleration API) - API akceleracji filmów
 Name:		libva
-Version:	1.0.8
+Version:	1.0.10
 Release:	1
 License:	BSD
 Group:		Libraries
-# git clone git://anongit.freedesktop.org/git/libva
 #Source0Download: http://cgit.freedesktop.org/libva/
 Source0:	http://cgit.freedesktop.org/libva/snapshot/%{name}-%{version}.tar.bz2
-# Source0-md5:	f55c5399f717ba84b4912136cbe32b15
+# Source0-md5:	959de03d47654adab855e10bff614df3
+Patch0:		%{name}-i965.patch
 URL:		http://www.freedesktop.org/wiki/Software/vaapi
 BuildRequires:	Mesa-libGL-devel
 BuildRequires:	autoconf >= 2.57
@@ -60,6 +60,7 @@ Statyczne biblioteki libva.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__libtoolize}
@@ -98,6 +99,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/vainfo
 %attr(755,root,root) %{_libdir}/libva.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libva.so.1
+%attr(755,root,root) %{_libdir}/libva-egl.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libva-egl.so.1
 %attr(755,root,root) %{_libdir}/libva-glx.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libva-glx.so.1
 %attr(755,root,root) %{_libdir}/libva-tpi.so.*.*.*
@@ -112,15 +115,18 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libva.so
+%attr(755,root,root) %{_libdir}/libva-egl.so
 %attr(755,root,root) %{_libdir}/libva-glx.so
 %attr(755,root,root) %{_libdir}/libva-tpi.so
 %attr(755,root,root) %{_libdir}/libva-x11.so
 %{_libdir}/libva.la
+%{_libdir}/libva-egl.la
 %{_libdir}/libva-glx.la
 %{_libdir}/libva-tpi.la
 %{_libdir}/libva-x11.la
 %{_includedir}/va
 %{_pkgconfigdir}/libva.pc
+%{_pkgconfigdir}/libva-egl.pc
 %{_pkgconfigdir}/libva-glx.pc
 %{_pkgconfigdir}/libva-tpi.pc
 %{_pkgconfigdir}/libva-x11.pc
@@ -128,6 +134,7 @@ rm -rf $RPM_BUILD_ROOT
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libva.a
+%{_libdir}/libva-egl.a
 %{_libdir}/libva-glx.a
 %{_libdir}/libva-tpi.a
 %{_libdir}/libva-x11.a
