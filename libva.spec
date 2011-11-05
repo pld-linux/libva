@@ -1,23 +1,24 @@
 Summary:	VAAPI (Video Acceleration API)
 Summary(pl.UTF-8):	VAAPI (Video Acceleration API) - API akceleracji filmów
 Name:		libva
-Version:	1.0.14
+Version:	1.0.15
 Release:	1
-License:	BSD
+License:	MIT
 Group:		Libraries
 #Source0Download: http://cgit.freedesktop.org/libva/
 Source0:	http://cgit.freedesktop.org/libva/snapshot/%{name}-%{version}.tar.bz2
-# Source0-md5:	9a7eba239bffa3b40d7a49e3bb4fb6fb
+# Source0-md5:	ad8a94ba87ff0563a533c3c142816794
 URL:		http://www.freedesktop.org/wiki/Software/vaapi
 BuildRequires:	Mesa-libGL-devel
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake
-BuildRequires:	libdrm-devel >= 2.4.23
+BuildRequires:	libdrm-devel >= 2.4
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
+BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXext-devel
 BuildRequires:	xorg-lib-libXfixes-devel
-Requires:	libdrm >= 2.4.23
+Requires:	libdrm >= 2.4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -69,7 +70,6 @@ Statyczne biblioteki libva.
 %configure \
 	--disable-silent-rules \
 	--enable-static \
-	--enable-i965-driver \
 	--with-drivers-path=%{_libdir}/%{name}/dri
 
 %{__make}
@@ -90,6 +90,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
+%doc COPYING NEWS
 %attr(755,root,root) %{_bindir}/avcenc
 %attr(755,root,root) %{_bindir}/h264encode
 %attr(755,root,root) %{_bindir}/mpeg2vldemo
@@ -108,7 +109,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/dri
 %attr(755,root,root) %{_libdir}/%{name}/dri/dummy_drv_video.so
-%attr(755,root,root) %{_libdir}/%{name}/dri/i965_drv_video.so
 
 %files devel
 %defattr(644,root,root,755)
