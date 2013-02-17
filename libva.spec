@@ -257,6 +257,20 @@ VAAPI - X11 interface static library.
 %description x11-static -l pl.UTF-8
 VAAPI - statyczna biblioteka interfejsu X11.
 
+%package tools
+Summary:	VAAPI test and example programs
+Summary(pl.UTF-8):	Programy testowe i przykładowe do VAAPI
+Group:		Applications/Graphics
+Requires:	%{name}-drm = %{version}-%{release}
+Requires:	%{name}-wayland = %{version}-%{release}
+Requires:	%{name}-x11 = %{version}-%{release}
+
+%description tools
+VAAPI test and example programs.
+
+%description tools -l pl.UTF-8
+Programy testowe i przykładowe do VAAPI.
+
 %prep
 %setup -q
 %patch0 -p1
@@ -307,12 +321,6 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc COPYING NEWS
-%attr(755,root,root) %{_bindir}/avcenc
-%attr(755,root,root) %{_bindir}/h264encode
-%attr(755,root,root) %{_bindir}/loadjpeg
-%attr(755,root,root) %{_bindir}/mpeg2vldemo
-%attr(755,root,root) %{_bindir}/putsurface
-%attr(755,root,root) %{_bindir}/vainfo
 %attr(755,root,root) %{_libdir}/libva.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libva.so.1
 %attr(755,root,root) %{_libdir}/libva-tpi.so.*.*.*
@@ -413,6 +421,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files x11
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/h264encode
+%attr(755,root,root) %{_bindir}/putsurface
 %attr(755,root,root) %{_libdir}/libva-x11.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libva-x11.so.1
 
@@ -428,3 +438,10 @@ rm -rf $RPM_BUILD_ROOT
 %files x11-static
 %defattr(644,root,root,755)
 %{_libdir}/libva-x11.a
+
+%files tools
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/avcenc
+%attr(755,root,root) %{_bindir}/loadjpeg
+%attr(755,root,root) %{_bindir}/mpeg2vldemo
+%attr(755,root,root) %{_bindir}/vainfo
