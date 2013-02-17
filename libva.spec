@@ -1,24 +1,27 @@
 Summary:	VAAPI (Video Acceleration API)
 Summary(pl.UTF-8):	VAAPI (Video Acceleration API) - API akceleracji filmów
 Name:		libva
-Version:	1.0.15
+Version:	1.1.0
 Release:	1
 License:	MIT
 Group:		Libraries
-#Source0Download: http://cgit.freedesktop.org/libva/
-Source0:	http://cgit.freedesktop.org/libva/snapshot/%{name}-%{version}.tar.bz2
-# Source0-md5:	ad8a94ba87ff0563a533c3c142816794
+Source0:	http://www.freedesktop.org/software/vaapi/releases/libva/%{name}-%{version}.tar.bz2
+# Source0-md5:	51bb3b8de1de14ea036f68ef5065a932
+Patch0:		%{name}-am.patch
+Patch1:		%{name}-wayland.patch
 URL:		http://www.freedesktop.org/wiki/Software/vaapi
+BuildRequires:	Mesa-libEGL-devel
 BuildRequires:	Mesa-libGL-devel
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake
 BuildRequires:	libdrm-devel >= 2.4
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
+# wayland-client
+BuildRequires:	wayland-devel >= 1.0.0
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXext-devel
 BuildRequires:	xorg-lib-libXfixes-devel
-Requires:	libdrm >= 2.4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -58,8 +61,206 @@ Static libva libraries.
 %description static -l pl.UTF-8
 Statyczne biblioteki libva.
 
+%package drm
+Summary:	VAAPI - DRM interface library
+Summary(pl.UTF-8):	VAAPI - biblioteka interfejsu DRM
+Group:		Libraries
+Requires:	%{name} = %{version}-%{release}
+Requires:	libdrm >= 2.4
+
+%description drm
+VAAPI - DRM interface library.
+
+%description drm -l pl.UTF-8
+VAAPI - biblioteka interfejsu DRM.
+
+%package drm-devel
+Summary:	Header files for VAAPI DRM interface library
+Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki interfejsu DRM VAAPI
+Group:		Development/Libraries
+Requires:	%{name}-devel = %{version}-%{release}
+Requires:	%{name}-drm = %{version}-%{release}
+Requires:	libdrm-devel >= 2.4
+
+%description drm-devel
+Header files for VAAPI DRM interface library.
+
+%description drm-devel -l pl.UTF-8
+Pliki nagłówkowe biblioteki interfejsu DRM VAAPI.
+
+%package drm-static
+Summary:	VAAPI - DRM interface static library
+Summary(pl.UTF-8):	VAAPI - statyczna biblioteka interfejsu DRM
+Group:		Development/Libraries
+Requires:	%{name}-drm-devel = %{version}-%{release}
+
+%description drm-static
+VAAPI - DRM interface static library.
+
+%description drm-static -l pl.UTF-8
+VAAPI - statyczna biblioteka interfejsu DRM.
+
+%package egl
+Summary:	VAAPI - EGL interface library
+Summary(pl.UTF-8):	VAAPI - biblioteka interfejsu EGL
+Group:		Libraries
+Requires:	%{name}-x11 = %{version}-%{release}
+
+%description egl
+VAAPI - EGL interface library.
+
+%description egl -l pl.UTF-8
+VAAPI - biblioteka interfejsu EGL.
+
+%package egl-devel
+Summary:	Header files for VAAPI EGL interface library
+Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki interfejsu EGL VAAPI
+Group:		Development/Libraries
+Requires:	%{name}-egl = %{version}-%{release}
+Requires:	%{name}-x11-devel = %{version}-%{release}
+Requires:	EGL-devel
+
+%description egl-devel
+Header files for VAAPI EGL interface library.
+
+%description egl-devel -l pl.UTF-8
+Pliki nagłówkowe biblioteki interfejsu EGL VAAPI.
+
+%package egl-static
+Summary:	VAAPI - EGL interface static library
+Summary(pl.UTF-8):	VAAPI - statyczna biblioteka interfejsu EGL
+Group:		Development/Libraries
+Requires:	%{name}-egl-devel = %{version}-%{release}
+
+%description egl-static
+VAAPI - EGL interface static library.
+
+%description egl-static -l pl.UTF-8
+VAAPI - statyczna biblioteka interfejsu EGL.
+
+%package glx
+Summary:	VAAPI - GLX interface library
+Summary(pl.UTF-8):	VAAPI - biblioteka interfejsu GLX
+Group:		Libraries
+Requires:	%{name}-x11 = %{version}-%{release}
+
+%description glx
+VAAPI - GLX interface library.
+
+%description glx -l pl.UTF-8
+VAAPI - biblioteka interfejsu GLX.
+
+%package glx-devel
+Summary:	Header files for VAAPI GLX interface library
+Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki interfejsu GLX VAAPI
+Group:		Development/Libraries
+Requires:	%{name}-glx = %{version}-%{release}
+Requires:	%{name}-x11-devel = %{version}-%{release}
+Requires:	OpenGL-GLX-devel
+
+%description glx-devel
+Header files for VAAPI GLX interface library.
+
+%description glx-devel -l pl.UTF-8
+Pliki nagłówkowe biblioteki interfejsu GLX VAAPI.
+
+%package glx-static
+Summary:	VAAPI - GLX interface static library
+Summary(pl.UTF-8):	VAAPI - statyczna biblioteka interfejsu GLX
+Group:		Development/Libraries
+Requires:	%{name}-glx-devel = %{version}-%{release}
+
+%description glx-static
+VAAPI - GLX interface static library.
+
+%description glx-static -l pl.UTF-8
+VAAPI - statyczna biblioteka interfejsu GLX.
+
+%package wayland
+Summary:	VAAPI - Wayland interface library
+Summary(pl.UTF-8):	VAAPI - biblioteka interfejsu Wayland
+Group:		Libraries
+Requires:	%{name} = %{version}-%{release}
+Requires:	wayland >= 1.0.0
+
+%description wayland
+VAAPI - Wayland interface library.
+
+%description wayland -l pl.UTF-8
+VAAPI - biblioteka interfejsu Wayland.
+
+%package wayland-devel
+Summary:	Header files for VAAPI Wayland interface library
+Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki interfejsu Wayland VAAPI
+Group:		Development/Libraries
+Requires:	%{name}-devel = %{version}-%{release}
+Requires:	%{name}-wayland = %{version}-%{release}
+Requires:	wayland-devel >= 1.0.0
+
+%description wayland-devel
+Header files for VAAPI Wayland interface library.
+
+%description wayland-devel -l pl.UTF-8
+Pliki nagłówkowe biblioteki interfejsu Wayland VAAPI.
+
+%package wayland-static
+Summary:	VAAPI - Wayland interface static library
+Summary(pl.UTF-8):	VAAPI - statyczna biblioteka interfejsu Wayland
+Group:		Development/Libraries
+Requires:	%{name}-wayland-devel = %{version}-%{release}
+
+%description wayland-static
+VAAPI - Wayland interface static library.
+
+%description wayland-static -l pl.UTF-8
+VAAPI - statyczna biblioteka interfejsu Wayland.
+
+%package x11
+Summary:	VAAPI - X11 interface library
+Summary(pl.UTF-8):	VAAPI - biblioteka interfejsu X11
+Group:		Libraries
+Requires:	%{name} = %{version}-%{release}
+Requires:	libdrm >= 2.4
+
+%description x11
+VAAPI - X11 interface library.
+
+%description x11 -l pl.UTF-8
+VAAPI - biblioteka interfejsu X11.
+
+%package x11-devel
+Summary:	Header files for VAAPI X11 interface library
+Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki interfejsu X11 VAAPI
+Group:		Development/Libraries
+Requires:	%{name}-devel = %{version}-%{release}
+Requires:	%{name}-x11 = %{version}-%{release}
+Requires:	libdrm-devel >= 2.4
+Requires:	xorg-lib-libX11-devel
+Requires:	xorg-lib-libXext-devel
+Requires:	xorg-lib-libXfixes-devel
+
+%description x11-devel
+Header files for VAAPI X11 interface library.
+
+%description x11-devel -l pl.UTF-8
+Pliki nagłówkowe biblioteki interfejsu X11 VAAPI.
+
+%package x11-static
+Summary:	VAAPI - X11 interface static library
+Summary(pl.UTF-8):	VAAPI - statyczna biblioteka interfejsu X11
+Group:		Development/Libraries
+Requires:	%{name}-x11-devel = %{version}-%{release}
+
+%description x11-static
+VAAPI - X11 interface static library.
+
+%description x11-static -l pl.UTF-8
+VAAPI - statyczna biblioteka interfejsu X11.
+
 %prep
 %setup -q
+%patch0 -p1
+%patch1 -p1
 
 %build
 %{__libtoolize}
@@ -85,27 +286,37 @@ rm -rf $RPM_BUILD_ROOT
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post   -p /sbin/ldconfig
-%postun -p /sbin/ldconfig
+%post	-p /sbin/ldconfig
+%postun	-p /sbin/ldconfig
+
+%post	drm -p /sbin/ldconfig
+%postun	drm -p /sbin/ldconfig
+
+%post	egl -p /sbin/ldconfig
+%postun	egl -p /sbin/ldconfig
+
+%post	glx -p /sbin/ldconfig
+%postun	glx -p /sbin/ldconfig
+
+%post	wayland -p /sbin/ldconfig
+%postun	wayland -p /sbin/ldconfig
+
+%post	x11 -p /sbin/ldconfig
+%postun	x11 -p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
 %doc COPYING NEWS
 %attr(755,root,root) %{_bindir}/avcenc
 %attr(755,root,root) %{_bindir}/h264encode
+%attr(755,root,root) %{_bindir}/loadjpeg
 %attr(755,root,root) %{_bindir}/mpeg2vldemo
 %attr(755,root,root) %{_bindir}/putsurface
 %attr(755,root,root) %{_bindir}/vainfo
 %attr(755,root,root) %{_libdir}/libva.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libva.so.1
-%attr(755,root,root) %{_libdir}/libva-egl.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libva-egl.so.1
-%attr(755,root,root) %{_libdir}/libva-glx.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libva-glx.so.1
 %attr(755,root,root) %{_libdir}/libva-tpi.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libva-tpi.so.1
-%attr(755,root,root) %{_libdir}/libva-x11.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libva-x11.so.1
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/dri
 %attr(755,root,root) %{_libdir}/%{name}/dri/dummy_drv_video.so
@@ -113,26 +324,107 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libva.so
-%attr(755,root,root) %{_libdir}/libva-egl.so
-%attr(755,root,root) %{_libdir}/libva-glx.so
 %attr(755,root,root) %{_libdir}/libva-tpi.so
-%attr(755,root,root) %{_libdir}/libva-x11.so
 %{_libdir}/libva.la
-%{_libdir}/libva-egl.la
-%{_libdir}/libva-glx.la
 %{_libdir}/libva-tpi.la
-%{_libdir}/libva-x11.la
-%{_includedir}/va
+%dir %{_includedir}/va
+%{_includedir}/va/va.h
+%{_includedir}/va/va_backend.h
+%{_includedir}/va/va_backend_tpi.h
+%{_includedir}/va/va_dec_jpeg.h
+%{_includedir}/va/va_drmcommon.h
+%{_includedir}/va/va_tpi.h
+%{_includedir}/va/va_version.h
 %{_pkgconfigdir}/libva.pc
-%{_pkgconfigdir}/libva-egl.pc
-%{_pkgconfigdir}/libva-glx.pc
 %{_pkgconfigdir}/libva-tpi.pc
-%{_pkgconfigdir}/libva-x11.pc
 
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libva.a
-%{_libdir}/libva-egl.a
-%{_libdir}/libva-glx.a
 %{_libdir}/libva-tpi.a
+
+%files drm
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libva-drm.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libva-drm.so.1
+
+%files drm-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libva-drm.so
+%{_libdir}/libva-drm.la
+%{_includedir}/va/va_drm.h
+%{_pkgconfigdir}/libva-drm.pc
+
+%files drm-static
+%defattr(644,root,root,755)
+%{_libdir}/libva-drm.a
+
+%files egl
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libva-egl.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libva-egl.so.1
+
+%files egl-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libva-egl.so
+%{_libdir}/libva-egl.la
+%{_includedir}/va/va_backend_egl.h
+%{_includedir}/va/va_egl.h
+%{_pkgconfigdir}/libva-egl.pc
+
+%files egl-static
+%defattr(644,root,root,755)
+%{_libdir}/libva-egl.a
+
+%files glx
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libva-glx.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libva-glx.so.1
+
+%files glx-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libva-glx.so
+%{_libdir}/libva-glx.la
+%{_includedir}/va/va_backend_glx.h
+%{_includedir}/va/va_glx.h
+%{_pkgconfigdir}/libva-glx.pc
+
+%files glx-static
+%defattr(644,root,root,755)
+%{_libdir}/libva-glx.a
+
+%files wayland
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/putsurface_wayland
+%attr(755,root,root) %{_libdir}/libva-wayland.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libva-wayland.so.1
+
+%files wayland-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libva-wayland.so
+%{_libdir}/libva-wayland.la
+%{_includedir}/va/va_backend_wayland.h
+%{_includedir}/va/va_wayland.h
+%{_pkgconfigdir}/libva-wayland.pc
+
+%files wayland-static
+%defattr(644,root,root,755)
+%{_libdir}/libva-wayland.a
+
+%files x11
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libva-x11.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libva-x11.so.1
+
+%files x11-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libva-x11.so
+%{_libdir}/libva-x11.la
+%{_includedir}/va/va_dri2.h
+%{_includedir}/va/va_dricommon.h
+%{_includedir}/va/va_x11.h
+%{_pkgconfigdir}/libva-x11.pc
+
+%files x11-static
+%defattr(644,root,root,755)
 %{_libdir}/libva-x11.a
