@@ -1,12 +1,12 @@
 Summary:	VAAPI (Video Acceleration API)
 Summary(pl.UTF-8):	VAAPI (Video Acceleration API) - API akceleracji filmów
 Name:		libva
-Version:	1.1.1
+Version:	1.2.1
 Release:	1
 License:	MIT
 Group:		Libraries
 Source0:	http://www.freedesktop.org/software/vaapi/releases/libva/%{name}-%{version}.tar.bz2
-# Source0-md5:	cd5cc1ce37d6fc6f991ef579ac81d891
+# Source0-md5:	ca95b343050cf8feaf98dfe08ce0191b
 URL:		http://www.freedesktop.org/wiki/Software/vaapi
 BuildRequires:	Mesa-libEGL-devel
 BuildRequires:	Mesa-libGL-devel
@@ -335,10 +335,15 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/va/va.h
 %{_includedir}/va/va_backend.h
 %{_includedir}/va/va_backend_tpi.h
+%{_includedir}/va/va_backend_vpp.h
+%{_includedir}/va/va_compat.h
 %{_includedir}/va/va_dec_jpeg.h
 %{_includedir}/va/va_drmcommon.h
+%{_includedir}/va/va_enc_h264.h
+%{_includedir}/va/va_enc_mpeg2.h
 %{_includedir}/va/va_tpi.h
 %{_includedir}/va/va_version.h
+%{_includedir}/va/va_vpp.h
 %{_pkgconfigdir}/libva.pc
 %{_pkgconfigdir}/libva-tpi.pc
 
@@ -439,5 +444,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/avcenc
 %attr(755,root,root) %{_bindir}/loadjpeg
+%attr(755,root,root) %{_bindir}/mpeg2vaenc
 %attr(755,root,root) %{_bindir}/mpeg2vldemo
 %attr(755,root,root) %{_bindir}/vainfo
