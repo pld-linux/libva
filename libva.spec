@@ -1,12 +1,12 @@
 Summary:	VAAPI (Video Acceleration API)
 Summary(pl.UTF-8):	VAAPI (Video Acceleration API) - API akceleracji filmów
 Name:		libva
-Version:	1.2.1
+Version:	1.3.0
 Release:	1
 License:	MIT
 Group:		Libraries
 Source0:	http://www.freedesktop.org/software/vaapi/releases/libva/%{name}-%{version}.tar.bz2
-# Source0-md5:	ca95b343050cf8feaf98dfe08ce0191b
+# Source0-md5:	471bef887e92437914a7e1f799995570
 URL:		http://www.freedesktop.org/wiki/Software/vaapi
 BuildRequires:	Mesa-libEGL-devel
 BuildRequires:	Mesa-libGL-devel
@@ -288,8 +288,12 @@ Programy testowe i przykładowe do VAAPI.
 %install
 rm -rf $RPM_BUILD_ROOT
 
+install -d $RPM_BUILD_ROOT/etc
+
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
+
+echo "#LIBVA_DRIVER_NAME=vdpau" > $RPM_BUILD_ROOT/etc/libva.conf
 
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/%{name}/dri/*.{a,la}
 
@@ -324,6 +328,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/dri
 %attr(755,root,root) %{_libdir}/%{name}/dri/dummy_drv_video.so
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/libva.conf
 
 %files devel
 %defattr(644,root,root,755)
@@ -338,6 +343,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/va/va_backend_vpp.h
 %{_includedir}/va/va_compat.h
 %{_includedir}/va/va_dec_jpeg.h
+%{_includedir}/va/va_dec_vp8.h
 %{_includedir}/va/va_drmcommon.h
 %{_includedir}/va/va_enc_h264.h
 %{_includedir}/va/va_enc_mpeg2.h
