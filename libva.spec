@@ -1,12 +1,12 @@
 Summary:	VAAPI (Video Acceleration API)
 Summary(pl.UTF-8):	VAAPI (Video Acceleration API) - API akceleracji filmów
 Name:		libva
-Version:	1.4.1
+Version:	1.5.0
 Release:	1
 License:	MIT
 Group:		Libraries
 Source0:	http://www.freedesktop.org/software/vaapi/releases/libva/%{name}-%{version}.tar.bz2
-# Source0-md5:	8e3e7096750c14d1f98da807df7c1ba5
+# Source0-md5:	ad0b55794308ec397d249a0a2a6df27a
 URL:		http://www.freedesktop.org/wiki/Software/vaapi
 BuildRequires:	Mesa-libEGL-devel
 BuildRequires:	Mesa-libGL-devel
@@ -321,6 +321,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc COPYING NEWS
+%attr(755,root,root) %{_bindir}/jpegenc
 %attr(755,root,root) %{_libdir}/libva.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libva.so.1
 %attr(755,root,root) %{_libdir}/libva-tpi.so.*.*.*
@@ -342,10 +343,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/va/va_backend_tpi.h
 %{_includedir}/va/va_backend_vpp.h
 %{_includedir}/va/va_compat.h
+%{_includedir}/va/va_dec_hevc.h
 %{_includedir}/va/va_dec_jpeg.h
 %{_includedir}/va/va_dec_vp8.h
 %{_includedir}/va/va_drmcommon.h
 %{_includedir}/va/va_enc_h264.h
+%{_includedir}/va/va_enc_jpeg.h
 %{_includedir}/va/va_enc_mpeg2.h
 %{_includedir}/va/va_enc_vp8.h
 %{_includedir}/va/va_tpi.h
