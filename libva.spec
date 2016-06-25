@@ -1,12 +1,12 @@
 Summary:	VAAPI (Video Acceleration API)
 Summary(pl.UTF-8):	VAAPI (Video Acceleration API) - API akceleracji filmów
 Name:		libva
-Version:	1.7.0
+Version:	1.7.1
 Release:	1
 License:	MIT
 Group:		Libraries
 Source0:	https://www.freedesktop.org/software/vaapi/releases/libva/%{name}-%{version}.tar.bz2
-# Source0-md5:	7309097b790de8dbc9641ed6393eab9f
+# Source0-md5:	79f98dd94daa78a026ded79fbcc137c5
 URL:		https://www.freedesktop.org/wiki/Software/vaapi
 BuildRequires:	Mesa-libEGL-devel
 BuildRequires:	Mesa-libGL-devel
@@ -353,6 +353,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/va/va_enc_jpeg.h
 %{_includedir}/va/va_enc_mpeg2.h
 %{_includedir}/va/va_enc_vp8.h
+%{_includedir}/va/va_enc_vp9.h
 %{_includedir}/va/va_tpi.h
 %{_includedir}/va/va_version.h
 %{_includedir}/va/va_vpp.h
