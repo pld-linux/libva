@@ -1,12 +1,12 @@
 Summary:	VAAPI (Video Acceleration API)
 Summary(pl.UTF-8):	VAAPI (Video Acceleration API) - API akceleracji filmów
 Name:		libva
-Version:	1.7.2
+Version:	1.7.3
 Release:	1
 License:	MIT
 Group:		Libraries
 Source0:	https://www.freedesktop.org/software/vaapi/releases/libva/%{name}-%{version}.tar.bz2
-# Source0-md5:	77d30af5a4bfaec6dddc2bdcbbd92ef5
+# Source0-md5:	dafb1d7d6449e850e9eb1a099895c683
 URL:		https://www.freedesktop.org/wiki/Software/vaapi
 BuildRequires:	Mesa-libEGL-devel
 BuildRequires:	Mesa-libGL-devel
@@ -295,7 +295,7 @@ install -d $RPM_BUILD_ROOT/etc
 
 echo "#LIBVA_DRIVER_NAME=vdpau" > $RPM_BUILD_ROOT/etc/libva.conf
 
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/%{name}/dri/*.{a,la}
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/{%{name}/dri/*.{a,la},libva*.la}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -335,8 +335,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libva.so
 %attr(755,root,root) %{_libdir}/libva-tpi.so
-%{_libdir}/libva.la
-%{_libdir}/libva-tpi.la
 %dir %{_includedir}/va
 %{_includedir}/va/va.h
 %{_includedir}/va/va_backend.h
@@ -373,7 +371,6 @@ rm -rf $RPM_BUILD_ROOT
 %files drm-devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libva-drm.so
-%{_libdir}/libva-drm.la
 %{_includedir}/va/va_drm.h
 %{_pkgconfigdir}/libva-drm.pc
 
@@ -389,7 +386,6 @@ rm -rf $RPM_BUILD_ROOT
 %files egl-devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libva-egl.so
-%{_libdir}/libva-egl.la
 %{_includedir}/va/va_backend_egl.h
 %{_includedir}/va/va_egl.h
 %{_pkgconfigdir}/libva-egl.pc
@@ -406,7 +402,6 @@ rm -rf $RPM_BUILD_ROOT
 %files glx-devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libva-glx.so
-%{_libdir}/libva-glx.la
 %{_includedir}/va/va_backend_glx.h
 %{_includedir}/va/va_glx.h
 %{_pkgconfigdir}/libva-glx.pc
@@ -424,7 +419,6 @@ rm -rf $RPM_BUILD_ROOT
 %files wayland-devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libva-wayland.so
-%{_libdir}/libva-wayland.la
 %{_includedir}/va/va_backend_wayland.h
 %{_includedir}/va/va_wayland.h
 %{_pkgconfigdir}/libva-wayland.pc
@@ -443,7 +437,6 @@ rm -rf $RPM_BUILD_ROOT
 %files x11-devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libva-x11.so
-%{_libdir}/libva-x11.la
 %{_includedir}/va/va_dri2.h
 %{_includedir}/va/va_dricommon.h
 %{_includedir}/va/va_x11.h
