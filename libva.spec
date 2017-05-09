@@ -1,12 +1,16 @@
+#
+# Conditional build:
+%bcond_without	static_libs	# static libraries
+
 Summary:	VAAPI (Video Acceleration API)
 Summary(pl.UTF-8):	VAAPI (Video Acceleration API) - API akceleracji filmów
 Name:		libva
-Version:	1.7.3
+Version:	1.8.1
 Release:	1
 License:	MIT
 Group:		Libraries
 Source0:	https://www.freedesktop.org/software/vaapi/releases/libva/%{name}-%{version}.tar.bz2
-# Source0-md5:	dafb1d7d6449e850e9eb1a099895c683
+# Source0-md5:	a881c7f9c67bfd0f8bffac3bb535aaf2
 URL:		https://www.freedesktop.org/wiki/Software/vaapi
 BuildRequires:	Mesa-libEGL-devel
 BuildRequires:	Mesa-libGL-devel
@@ -280,7 +284,7 @@ Programy testowe i przykładowe do VAAPI.
 %{__automake}
 %configure \
 	--disable-silent-rules \
-	--enable-static \
+	%{?with_static_libs:--enable-static} \
 	--with-drivers-path=%{_libdir}/%{name}/dri
 
 %{__make}
@@ -321,7 +325,6 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc COPYING NEWS
-%attr(755,root,root) %{_bindir}/jpegenc
 %attr(755,root,root) %{_libdir}/libva.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libva.so.1
 %attr(755,root,root) %{_libdir}/libva-tpi.so.*.*.*
@@ -358,10 +361,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/libva.pc
 %{_pkgconfigdir}/libva-tpi.pc
 
+%if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libva.a
 %{_libdir}/libva-tpi.a
+%endif
 
 %files drm
 %defattr(644,root,root,755)
@@ -374,9 +379,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/va/va_drm.h
 %{_pkgconfigdir}/libva-drm.pc
 
+%if %{with static_libs}
 %files drm-static
 %defattr(644,root,root,755)
 %{_libdir}/libva-drm.a
+%endif
 
 %files egl
 %defattr(644,root,root,755)
@@ -390,9 +397,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/va/va_egl.h
 %{_pkgconfigdir}/libva-egl.pc
 
+%if %{with static_libs}
 %files egl-static
 %defattr(644,root,root,755)
 %{_libdir}/libva-egl.a
+%endif
 
 %files glx
 %defattr(644,root,root,755)
@@ -406,13 +415,14 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/va/va_glx.h
 %{_pkgconfigdir}/libva-glx.pc
 
+%if %{with static_libs}
 %files glx-static
 %defattr(644,root,root,755)
 %{_libdir}/libva-glx.a
+%endif
 
 %files wayland
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/putsurface_wayland
 %attr(755,root,root) %{_libdir}/libva-wayland.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libva-wayland.so.1
 
@@ -423,14 +433,14 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/va/va_wayland.h
 %{_pkgconfigdir}/libva-wayland.pc
 
+%if %{with static_libs}
 %files wayland-static
 %defattr(644,root,root,755)
 %{_libdir}/libva-wayland.a
+%endif
 
 %files x11
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/h264encode
-%attr(755,root,root) %{_bindir}/putsurface
 %attr(755,root,root) %{_libdir}/libva-x11.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libva-x11.so.1
 
@@ -442,14 +452,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/va/va_x11.h
 %{_pkgconfigdir}/libva-x11.pc
 
+%if %{with static_libs}
 %files x11-static
 %defattr(644,root,root,755)
 %{_libdir}/libva-x11.a
-
-%files tools
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/avcenc
-%attr(755,root,root) %{_bindir}/loadjpeg
-%attr(755,root,root) %{_bindir}/mpeg2vaenc
-%attr(755,root,root) %{_bindir}/mpeg2vldemo
-%attr(755,root,root) %{_bindir}/vainfo
+%endif
