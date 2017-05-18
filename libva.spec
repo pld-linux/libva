@@ -6,7 +6,7 @@ Summary:	VAAPI (Video Acceleration API)
 Summary(pl.UTF-8):	VAAPI (Video Acceleration API) - API akceleracji filmów
 Name:		libva
 Version:	1.8.1
-Release:	1
+Release:	2
 License:	MIT
 Group:		Libraries
 Source0:	https://www.freedesktop.org/software/vaapi/releases/libva/%{name}-%{version}.tar.bz2
