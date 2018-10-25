@@ -5,12 +5,12 @@
 Summary:	VAAPI (Video Acceleration API)
 Summary(pl.UTF-8):	VAAPI (Video Acceleration API) - API akceleracji filmów
 Name:		libva
-Version:	1.8.2
+Version:	2.3.0
 Release:	1
 License:	MIT
 Group:		Libraries
-Source0:	https://www.freedesktop.org/software/vaapi/releases/libva/%{name}-%{version}.tar.bz2
-# Source0-md5:	2ce6901495b64f4cc26dd0fb53eb5b14
+Source0:	https://www.freedesktop.org/software/vaapi/releases/libva/%{name}-%{version}.tar.gz
+# Source0-md5:	6a202c725db717a04e855d7495724059
 URL:		https://www.freedesktop.org/wiki/Software/vaapi
 BuildRequires:	Mesa-libEGL-devel
 BuildRequires:	Mesa-libGL-devel
@@ -101,44 +101,6 @@ VAAPI - DRM interface static library.
 
 %description drm-static -l pl.UTF-8
 VAAPI - statyczna biblioteka interfejsu DRM.
-
-%package egl
-Summary:	VAAPI - EGL interface library
-Summary(pl.UTF-8):	VAAPI - biblioteka interfejsu EGL
-Group:		Libraries
-Requires:	%{name}-x11 = %{version}-%{release}
-
-%description egl
-VAAPI - EGL interface library.
-
-%description egl -l pl.UTF-8
-VAAPI - biblioteka interfejsu EGL.
-
-%package egl-devel
-Summary:	Header files for VAAPI EGL interface library
-Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki interfejsu EGL VAAPI
-Group:		Development/Libraries
-Requires:	%{name}-egl = %{version}-%{release}
-Requires:	%{name}-x11-devel = %{version}-%{release}
-Requires:	EGL-devel
-
-%description egl-devel
-Header files for VAAPI EGL interface library.
-
-%description egl-devel -l pl.UTF-8
-Pliki nagłówkowe biblioteki interfejsu EGL VAAPI.
-
-%package egl-static
-Summary:	VAAPI - EGL interface static library
-Summary(pl.UTF-8):	VAAPI - statyczna biblioteka interfejsu EGL
-Group:		Development/Libraries
-Requires:	%{name}-egl-devel = %{version}-%{release}
-
-%description egl-static
-VAAPI - EGL interface static library.
-
-%description egl-static -l pl.UTF-8
-VAAPI - statyczna biblioteka interfejsu EGL.
 
 %package glx
 Summary:	VAAPI - GLX interface library
@@ -299,7 +261,7 @@ install -d $RPM_BUILD_ROOT/etc
 
 echo "#LIBVA_DRIVER_NAME=vdpau" > $RPM_BUILD_ROOT/etc/libva.conf
 
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/{%{name}/dri/*.{a,la},libva*.la}
+#%{__rm} $RPM_BUILD_ROOT%{_libdir}/{%{name}/dri/*.{a,la},libva*.la}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -309,9 +271,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %post	drm -p /sbin/ldconfig
 %postun	drm -p /sbin/ldconfig
-
-%post	egl -p /sbin/ldconfig
-%postun	egl -p /sbin/ldconfig
 
 %post	glx -p /sbin/ldconfig
 %postun	glx -p /sbin/ldconfig
@@ -326,22 +285,19 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc COPYING NEWS
 %attr(755,root,root) %{_libdir}/libva.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libva.so.1
-%attr(755,root,root) %{_libdir}/libva-tpi.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libva-tpi.so.1
-%dir %{_libdir}/%{name}
-%dir %{_libdir}/%{name}/dri
-%attr(755,root,root) %{_libdir}/%{name}/dri/dummy_drv_video.so
+%attr(755,root,root) %ghost %{_libdir}/libva.so.2
+#%dir %{_libdir}/%{name}
+#%dir %{_libdir}/%{name}/dri
+#%attr(755,root,root) %{_libdir}/%{name}/dri/dummy_drv_video.so
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/libva.conf
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libva.so
-%attr(755,root,root) %{_libdir}/libva-tpi.so
 %dir %{_includedir}/va
 %{_includedir}/va/va.h
 %{_includedir}/va/va_backend.h
-%{_includedir}/va/va_backend_tpi.h
+#%{_includedir}/va/va_backend_tpi.h
 %{_includedir}/va/va_backend_vpp.h
 %{_includedir}/va/va_compat.h
 %{_includedir}/va/va_dec_hevc.h
@@ -349,29 +305,30 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/va/va_dec_vp8.h
 %{_includedir}/va/va_dec_vp9.h
 %{_includedir}/va/va_drmcommon.h
+%{_includedir}/va/va_egl.h
 %{_includedir}/va/va_enc_hevc.h
 %{_includedir}/va/va_enc_h264.h
 %{_includedir}/va/va_enc_jpeg.h
 %{_includedir}/va/va_enc_mpeg2.h
 %{_includedir}/va/va_enc_vp8.h
 %{_includedir}/va/va_enc_vp9.h
+%{_includedir}/va/va_fei*.h
+%{_includedir}/va/va_str.h
 %{_includedir}/va/va_tpi.h
 %{_includedir}/va/va_version.h
 %{_includedir}/va/va_vpp.h
 %{_pkgconfigdir}/libva.pc
-%{_pkgconfigdir}/libva-tpi.pc
 
 %if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libva.a
-%{_libdir}/libva-tpi.a
 %endif
 
 %files drm
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libva-drm.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libva-drm.so.1
+%attr(755,root,root) %ghost %{_libdir}/libva-drm.so.2
 
 %files drm-devel
 %defattr(644,root,root,755)
@@ -385,28 +342,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libva-drm.a
 %endif
 
-%files egl
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libva-egl.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libva-egl.so.1
-
-%files egl-devel
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libva-egl.so
-%{_includedir}/va/va_backend_egl.h
-%{_includedir}/va/va_egl.h
-%{_pkgconfigdir}/libva-egl.pc
-
-%if %{with static_libs}
-%files egl-static
-%defattr(644,root,root,755)
-%{_libdir}/libva-egl.a
-%endif
-
 %files glx
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libva-glx.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libva-glx.so.1
+%attr(755,root,root) %ghost %{_libdir}/libva-glx.so.2
 
 %files glx-devel
 %defattr(644,root,root,755)
@@ -424,7 +363,7 @@ rm -rf $RPM_BUILD_ROOT
 %files wayland
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libva-wayland.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libva-wayland.so.1
+%attr(755,root,root) %ghost %{_libdir}/libva-wayland.so.2
 
 %files wayland-devel
 %defattr(644,root,root,755)
@@ -442,7 +381,7 @@ rm -rf $RPM_BUILD_ROOT
 %files x11
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libva-x11.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libva-x11.so.1
+%attr(755,root,root) %ghost %{_libdir}/libva-x11.so.2
 
 %files x11-devel
 %defattr(644,root,root,755)
