@@ -9,8 +9,8 @@ Version:	2.3.0
 Release:	1
 License:	MIT
 Group:		Libraries
-Source0:	https://github.com/intel/libva/releases/download/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	6a202c725db717a04e855d7495724059
+Source0:	https://github.com/intel/libva/releases/download/%{version}/%{name}-%{version}.tar.bz2
+# Source0-md5:	2555c46075ab2f6128f39902ba1c6183
 URL:		https://github.com/intel/libva
 BuildRequires:	Mesa-libEGL-devel
 BuildRequires:	Mesa-libGL-devel
