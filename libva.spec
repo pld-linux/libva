@@ -9,9 +9,9 @@ Version:	2.3.0
 Release:	1
 License:	MIT
 Group:		Libraries
-Source0:	https://www.freedesktop.org/software/vaapi/releases/libva/%{name}-%{version}.tar.gz
+Source0:	https://github.com/intel/libva/releases/download/%{version}/%{name}-%{version}.tar.gz
 # Source0-md5:	6a202c725db717a04e855d7495724059
-URL:		https://www.freedesktop.org/wiki/Software/vaapi
+URL:		https://github.com/intel/libva
 BuildRequires:	Mesa-libEGL-devel
 BuildRequires:	Mesa-libGL-devel
 BuildRequires:	autoconf >= 2.57
