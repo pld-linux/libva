@@ -6,7 +6,7 @@ Summary:	VAAPI (Video Acceleration API)
 Summary(pl.UTF-8):	VAAPI (Video Acceleration API) - API akceleracji filmów
 Name:		libva
 Version:	2.3.0
-Release:	1
+Release:	2
 License:	MIT
 Group:		Libraries
 Source0:	https://github.com/intel/libva/releases/download/%{version}/%{name}-%{version}.tar.bz2
@@ -255,6 +255,7 @@ Programy testowe i przykładowe do VAAPI.
 rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT/etc
+install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/dri
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
@@ -286,8 +287,8 @@ rm -rf $RPM_BUILD_ROOT
 %doc COPYING NEWS
 %attr(755,root,root) %{_libdir}/libva.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libva.so.2
-#%dir %{_libdir}/%{name}
-#%dir %{_libdir}/%{name}/dri
+%dir %{_libdir}/%{name}
+%dir %{_libdir}/%{name}/dri
 #%attr(755,root,root) %{_libdir}/%{name}/dri/dummy_drv_video.so
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/libva.conf
 
