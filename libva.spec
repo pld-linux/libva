@@ -5,12 +5,13 @@
 Summary:	VAAPI (Video Acceleration API)
 Summary(pl.UTF-8):	VAAPI (Video Acceleration API) - API akceleracji filmów
 Name:		libva
-Version:	2.3.0
-Release:	2
+Version:	2.4.0
+Release:	1
 License:	MIT
 Group:		Libraries
+#Source0Download: https://github.com/intel/libva/releases/
 Source0:	https://github.com/intel/libva/releases/download/%{version}/%{name}-%{version}.tar.bz2
-# Source0-md5:	2555c46075ab2f6128f39902ba1c6183
+# Source0-md5:	cfc69c2a5f526dd1858e098fb8eebfa6
 URL:		https://github.com/intel/libva
 BuildRequires:	Mesa-libEGL-devel
 BuildRequires:	Mesa-libGL-devel
@@ -24,6 +25,9 @@ BuildRequires:	wayland-devel >= 1.0.0
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXext-devel
 BuildRequires:	xorg-lib-libXfixes-devel
+Obsoletes:	libva-egl
+Obsoletes:	libva-egl-devel
+Obsoletes:	libva-egl-static
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -253,7 +257,6 @@ Programy testowe i przykładowe do VAAPI.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
 install -d $RPM_BUILD_ROOT/etc
 install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/dri
 
@@ -262,7 +265,7 @@ install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/dri
 
 echo "#LIBVA_DRIVER_NAME=vdpau" > $RPM_BUILD_ROOT/etc/libva.conf
 
-#%{__rm} $RPM_BUILD_ROOT%{_libdir}/{%{name}/dri/*.{a,la},libva*.la}
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/libva*.la
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -289,7 +292,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %ghost %{_libdir}/libva.so.2
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/dri
-#%attr(755,root,root) %{_libdir}/%{name}/dri/dummy_drv_video.so
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/libva.conf
 
 %files devel
@@ -298,7 +300,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_includedir}/va
 %{_includedir}/va/va.h
 %{_includedir}/va/va_backend.h
-#%{_includedir}/va/va_backend_tpi.h
 %{_includedir}/va/va_backend_vpp.h
 %{_includedir}/va/va_compat.h
 %{_includedir}/va/va_dec_hevc.h
