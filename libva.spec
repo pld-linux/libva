@@ -5,15 +5,13 @@
 Summary:	VAAPI (Video Acceleration API)
 Summary(pl.UTF-8):	VAAPI (Video Acceleration API) - API akceleracji filmów
 Name:		libva
-Version:	2.4.1
+Version:	2.5.0
 Release:	1
 License:	MIT
 Group:		Libraries
 #Source0Download: https://github.com/intel/libva/releases/
-# versions up to 2.4.0 had release tarballs, 2.4.1 only archive
-#Source0:	https://github.com/intel/libva/releases/download/%{version}/%{name}-%{version}.tar.bz2
-Source0:	https://github.com/intel/libva/archive/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	2aaf2d07860051fcde2353fd835e199b
+Source0:	https://github.com/intel/libva/releases/download/%{version}/%{name}-%{version}.tar.bz2
+# Source0-md5:	3688212fb7a87947070f3729e91ff7cf
 URL:		https://github.com/intel/libva
 BuildRequires:	Mesa-libEGL-devel
 BuildRequires:	Mesa-libGL-devel
@@ -23,7 +21,7 @@ BuildRequires:	libdrm-devel >= 2.4
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
 # wayland-client
-BuildRequires:	wayland-devel >= 1.0.0
+BuildRequires:	wayland-devel >= 1.11.0
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXext-devel
 BuildRequires:	xorg-lib-libXfixes-devel
@@ -151,7 +149,7 @@ Summary:	VAAPI - Wayland interface library
 Summary(pl.UTF-8):	VAAPI - biblioteka interfejsu Wayland
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	wayland >= 1.0.0
+Requires:	wayland >= 1.11.0
 
 %description wayland
 VAAPI - Wayland interface library.
@@ -165,7 +163,7 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki interfejsu Wayland VAAPI
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Requires:	%{name}-wayland = %{version}-%{release}
-Requires:	wayland-devel >= 1.0.0
+Requires:	wayland-devel >= 1.11.0
 
 %description wayland-devel
 Header files for VAAPI Wayland interface library.
@@ -246,7 +244,7 @@ Programy testowe i przykładowe do VAAPI.
 
 %build
 %{__libtoolize}
-%{__aclocal}
+%{__aclocal} -I m4
 %{__autoconf}
 %{__autoheader}
 %{__automake}
