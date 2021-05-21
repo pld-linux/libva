@@ -13,21 +13,22 @@ Group:		Libraries
 Source0:	https://github.com/intel/libva/releases/download/%{version}/%{name}-%{version}.tar.bz2
 # Source0-md5:	51df77bc5d0b6f8adccb10559a2cd7a1
 URL:		https://github.com/intel/libva
-BuildRequires:	Mesa-libEGL-devel
-BuildRequires:	Mesa-libGL-devel
+BuildRequires:	OpenGL-devel
+BuildRequires:	OpenGL-GLX-devel
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake
 BuildRequires:	libdrm-devel >= 2.4
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
+BuildRequires:	pkgconfig(gl)
 # wayland-client
 BuildRequires:	wayland-devel >= 1.11.0
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXext-devel
 BuildRequires:	xorg-lib-libXfixes-devel
-Obsoletes:	libva-egl
-Obsoletes:	libva-egl-devel
-Obsoletes:	libva-egl-static
+Obsoletes:	libva-egl < 2.0
+Obsoletes:	libva-egl-devel < 2.0
+Obsoletes:	libva-egl-static < 2.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
