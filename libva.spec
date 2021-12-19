@@ -5,19 +5,19 @@
 Summary:	VAAPI (Video Acceleration API)
 Summary(pl.UTF-8):	VAAPI (Video Acceleration API) - API akceleracji filmów
 Name:		libva
-Version:	2.11.0
+Version:	2.13.0
 Release:	1
 License:	MIT
 Group:		Libraries
 #Source0Download: https://github.com/intel/libva/releases/
 Source0:	https://github.com/intel/libva/releases/download/%{version}/%{name}-%{version}.tar.bz2
-# Source0-md5:	51df77bc5d0b6f8adccb10559a2cd7a1
+# Source0-md5:	51490259c307c65fcc36447d92856152
 URL:		https://github.com/intel/libva
 BuildRequires:	OpenGL-devel
 BuildRequires:	OpenGL-GLX-devel
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake
-BuildRequires:	libdrm-devel >= 2.4
+BuildRequires:	libdrm-devel >= 2.4.60
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
 BuildRequires:	pkgconfig(gl)
@@ -73,7 +73,7 @@ Summary:	VAAPI - DRM interface library
 Summary(pl.UTF-8):	VAAPI - biblioteka interfejsu DRM
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	libdrm >= 2.4
+Requires:	libdrm >= 2.4.60
 
 %description drm
 VAAPI - DRM interface library.
@@ -87,7 +87,7 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki interfejsu DRM VAAPI
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Requires:	%{name}-drm = %{version}-%{release}
-Requires:	libdrm-devel >= 2.4
+Requires:	libdrm-devel >= 2.4.60
 
 %description drm-devel
 Header files for VAAPI DRM interface library.
@@ -189,7 +189,7 @@ Summary:	VAAPI - X11 interface library
 Summary(pl.UTF-8):	VAAPI - biblioteka interfejsu X11
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	libdrm >= 2.4
+Requires:	libdrm >= 2.4.60
 
 %description x11
 VAAPI - X11 interface library.
@@ -203,7 +203,7 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki interfejsu X11 VAAPI
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Requires:	%{name}-x11 = %{version}-%{release}
-Requires:	libdrm-devel >= 2.4
+Requires:	libdrm-devel >= 2.4.60
 Requires:	xorg-lib-libX11-devel
 Requires:	xorg-lib-libXext-devel
 Requires:	xorg-lib-libXfixes-devel
