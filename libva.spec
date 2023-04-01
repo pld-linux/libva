@@ -5,13 +5,13 @@
 Summary:	VAAPI (Video Acceleration API)
 Summary(pl.UTF-8):	VAAPI (Video Acceleration API) - API akceleracji filmów
 Name:		libva
-Version:	2.15.0
+Version:	2.18.0
 Release:	1
 License:	MIT
 Group:		Libraries
 #Source0Download: https://github.com/intel/libva/releases/
 Source0:	https://github.com/intel/libva/releases/download/%{version}/%{name}-%{version}.tar.bz2
-# Source0-md5:	9d13c18c4f84623be7cad1192de99ed8
+# Source0-md5:	b597a43395daebf65f23872b67bcd794
 URL:		https://github.com/intel/libva
 BuildRequires:	OpenGL-devel
 BuildRequires:	OpenGL-GLX-devel
@@ -19,10 +19,12 @@ BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake
 BuildRequires:	libdrm-devel >= 2.4.60
 BuildRequires:	libtool
+# xcb xcb-dri3
+BuildRequires:	libxcb-devel
 BuildRequires:	pkgconfig
 BuildRequires:	pkgconfig(gl)
-# wayland-client
-BuildRequires:	wayland-devel >= 1.11.0
+# wayland-client >= 1.11, wayland-scanner >= 1.15
+BuildRequires:	wayland-devel >= 1.15
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXext-devel
 BuildRequires:	xorg-lib-libXfixes-devel
