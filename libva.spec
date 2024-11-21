@@ -228,20 +228,6 @@ VAAPI - X11 interface static library.
 %description x11-static -l pl.UTF-8
 VAAPI - statyczna biblioteka interfejsu X11.
 
-%package tools
-Summary:	VAAPI test and example programs
-Summary(pl.UTF-8):	Programy testowe i przykładowe do VAAPI
-Group:		Applications/Graphics
-Requires:	%{name}-drm = %{version}-%{release}
-Requires:	%{name}-wayland = %{version}-%{release}
-Requires:	%{name}-x11 = %{version}-%{release}
-
-%description tools
-VAAPI test and example programs.
-
-%description tools -l pl.UTF-8
-Programy testowe i przykładowe do VAAPI.
-
 %prep
 %setup -q
 
