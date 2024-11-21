@@ -2,11 +2,15 @@
 # Conditional build:
 %bcond_without	static_libs	# static libraries
 
+%define		va_api_major	1
+%define		va_api_minor	22
+%define		va_api_micro	0
+
 Summary:	VAAPI (Video Acceleration API)
 Summary(pl.UTF-8):	VAAPI (Video Acceleration API) - API akceleracji filmów
 Name:		libva
 Version:	2.22.0
-Release:	1
+Release:	2
 License:	MIT
 Group:		Libraries
 #Source0Download: https://github.com/intel/libva/tags
@@ -28,6 +32,7 @@ BuildRequires:	wayland-devel >= 1.15
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXext-devel
 BuildRequires:	xorg-lib-libXfixes-devel
+Provides:	libva(va-api)%{?_isa} = %{va_api_major}.%{va_api_minor}.%{va_api_micro}
 Obsoletes:	libva-egl < 2.0
 Obsoletes:	libva-egl-devel < 2.0
 Obsoletes:	libva-egl-static < 2.0
@@ -230,6 +235,10 @@ VAAPI - statyczna biblioteka interfejsu X11.
 
 %prep
 %setup -q
+
+grep -q '^[^#]*m4_define.*va_api_major_version.*\[%{va_api_major}\]' configure.ac
+grep -q '^[^#]*m4_define.*va_api_minor_version.*\[%{va_api_minor}\]' configure.ac
+grep -q '^[^#]*m4_define.*va_api_micro_version.*\[%{va_api_micro}\]' configure.ac
 
 %build
 %{__libtoolize}
