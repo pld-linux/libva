@@ -3,30 +3,31 @@
 %bcond_without	static_libs	# static libraries
 
 %define		va_api_major	1
-%define		va_api_minor	22
+%define		va_api_minor	23
 %define		va_api_micro	0
 
 Summary:	VAAPI (Video Acceleration API)
 Summary(pl.UTF-8):	VAAPI (Video Acceleration API) - API akceleracji filmów
 Name:		libva
-Version:	2.22.0
-Release:	2
+Version:	2.23.0
+Release:	1
 License:	MIT
 Group:		Libraries
 #Source0Download: https://github.com/intel/libva/tags
 Source0:	https://github.com/intel/libva/archive/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	8dba13313d724b5e930f06e65b7437e2
+# Source0-md5:	826c08e6965d2059e7a6dc98e3292b88
 URL:		https://github.com/intel/libva
 BuildRequires:	OpenGL-devel
 BuildRequires:	OpenGL-GLX-devel
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake
-BuildRequires:	libdrm-devel >= 2.4.60
+BuildRequires:	libdrm-devel >= 2.4.75
 BuildRequires:	libtool
 # xcb xcb-dri3
 BuildRequires:	libxcb-devel
 BuildRequires:	pkgconfig
 BuildRequires:	pkgconfig(gl)
+BuildRequires:	rpmbuild(macros) >= 2.043
 # wayland-client >= 1.11, wayland-scanner >= 1.15
 BuildRequires:	wayland-devel >= 1.15
 BuildRequires:	xorg-lib-libX11-devel
@@ -80,7 +81,7 @@ Summary:	VAAPI - DRM interface library
 Summary(pl.UTF-8):	VAAPI - biblioteka interfejsu DRM
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	libdrm >= 2.4.60
+Requires:	libdrm >= 2.4.75
 
 %description drm
 VAAPI - DRM interface library.
@@ -94,7 +95,7 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki interfejsu DRM VAAPI
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Requires:	%{name}-drm = %{version}-%{release}
-Requires:	libdrm-devel >= 2.4.60
+Requires:	libdrm-devel >= 2.4.75
 
 %description drm-devel
 Header files for VAAPI DRM interface library.
@@ -196,7 +197,7 @@ Summary:	VAAPI - X11 interface library
 Summary(pl.UTF-8):	VAAPI - biblioteka interfejsu X11
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	libdrm >= 2.4.60
+Requires:	libdrm >= 2.4.75
 
 %description x11
 VAAPI - X11 interface library.
@@ -210,7 +211,7 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki interfejsu X11 VAAPI
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Requires:	%{name}-x11 = %{version}-%{release}
-Requires:	libdrm-devel >= 2.4.60
+Requires:	libdrm-devel >= 2.4.75
 Requires:	xorg-lib-libX11-devel
 Requires:	xorg-lib-libXext-devel
 Requires:	xorg-lib-libXfixes-devel
@@ -246,7 +247,8 @@ grep -q '^[^#]*m4_define.*va_api_micro_version.*\[%{va_api_micro}\]' configure.a
 %{__autoconf}
 %{__autoheader}
 %{__automake}
-bash \
+# libtool gets broken if not bash
+%define configureshell bash
 %configure \
 	--disable-silent-rules \
 	%{?with_static_libs:--enable-static} \
@@ -289,15 +291,15 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc COPYING NEWS
-%attr(755,root,root) %{_libdir}/libva.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libva.so.2
+%{_libdir}/libva.so.*.*.*
+%ghost %{_libdir}/libva.so.2
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/dri
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/libva.conf
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libva.so
+%{_libdir}/libva.so
 %dir %{_includedir}/va
 %{_includedir}/va/va.h
 %{_includedir}/va/va_backend.h
@@ -335,12 +337,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files drm
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libva-drm.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libva-drm.so.2
+%{_libdir}/libva-drm.so.*.*.*
+%ghost %{_libdir}/libva-drm.so.2
 
 %files drm-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libva-drm.so
+%{_libdir}/libva-drm.so
 %{_includedir}/va/va_drm.h
 %{_pkgconfigdir}/libva-drm.pc
 
@@ -352,12 +354,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files glx
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libva-glx.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libva-glx.so.2
+%{_libdir}/libva-glx.so.*.*.*
+%ghost %{_libdir}/libva-glx.so.2
 
 %files glx-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libva-glx.so
+%{_libdir}/libva-glx.so
 %{_includedir}/va/va_backend_glx.h
 %{_includedir}/va/va_glx.h
 %{_pkgconfigdir}/libva-glx.pc
@@ -370,12 +372,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files wayland
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libva-wayland.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libva-wayland.so.2
+%{_libdir}/libva-wayland.so.*.*.*
+%ghost %{_libdir}/libva-wayland.so.2
 
 %files wayland-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libva-wayland.so
+%{_libdir}/libva-wayland.so
 %{_includedir}/va/va_backend_wayland.h
 %{_includedir}/va/va_wayland.h
 %{_pkgconfigdir}/libva-wayland.pc
@@ -388,12 +390,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files x11
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libva-x11.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libva-x11.so.2
+%{_libdir}/libva-x11.so.*.*.*
+%ghost %{_libdir}/libva-x11.so.2
 
 %files x11-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libva-x11.so
+%{_libdir}/libva-x11.so
 %{_includedir}/va/va_dri2.h
 %{_includedir}/va/va_dricommon.h
 %{_includedir}/va/va_x11.h
