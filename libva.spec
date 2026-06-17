@@ -56,7 +56,7 @@ AVC/H.264, VC-1/VMW3).
 Summary:	Header files for libva libraries
 Summary(pl.UTF-8):	Pliki nagłówkowe bibliotek libva
 Group:		Development/Libraries
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name}%{?_isa} = %{version}-%{release}
 
 %description devel
 Header files for libva libraries.
@@ -68,7 +68,7 @@ Pliki nagłówkowe bibliotek libva.
 Summary:	Static libva libraries
 Summary(pl.UTF-8):	Statyczne biblioteki libva
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}-%{release}
+Requires:	%{name}-devel%{?_isa} = %{version}-%{release}
 
 %description static
 Static libva libraries.
@@ -80,8 +80,8 @@ Statyczne biblioteki libva.
 Summary:	VAAPI - DRM interface library
 Summary(pl.UTF-8):	VAAPI - biblioteka interfejsu DRM
 Group:		Libraries
-Requires:	%{name} = %{version}-%{release}
-Requires:	libdrm >= 2.4.75
+Requires:	%{name}%{?_isa} = %{version}-%{release}
+Requires:	libdrm%{?_isa} >= 2.4.75
 
 %description drm
 VAAPI - DRM interface library.
@@ -93,9 +93,9 @@ VAAPI - biblioteka interfejsu DRM.
 Summary:	Header files for VAAPI DRM interface library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki interfejsu DRM VAAPI
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}-%{release}
-Requires:	%{name}-drm = %{version}-%{release}
-Requires:	libdrm-devel >= 2.4.75
+Requires:	%{name}-devel%{?_isa} = %{version}-%{release}
+Requires:	%{name}-drm%{?_isa} = %{version}-%{release}
+Requires:	libdrm-devel%{?_isa} >= 2.4.75
 
 %description drm-devel
 Header files for VAAPI DRM interface library.
@@ -107,7 +107,7 @@ Pliki nagłówkowe biblioteki interfejsu DRM VAAPI.
 Summary:	VAAPI - DRM interface static library
 Summary(pl.UTF-8):	VAAPI - statyczna biblioteka interfejsu DRM
 Group:		Development/Libraries
-Requires:	%{name}-drm-devel = %{version}-%{release}
+Requires:	%{name}-drm-devel%{?_isa} = %{version}-%{release}
 
 %description drm-static
 VAAPI - DRM interface static library.
@@ -119,7 +119,7 @@ VAAPI - statyczna biblioteka interfejsu DRM.
 Summary:	VAAPI - GLX interface library
 Summary(pl.UTF-8):	VAAPI - biblioteka interfejsu GLX
 Group:		Libraries
-Requires:	%{name}-x11 = %{version}-%{release}
+Requires:	%{name}-x11%{?_isa} = %{version}-%{release}
 
 %description glx
 VAAPI - GLX interface library.
@@ -131,8 +131,8 @@ VAAPI - biblioteka interfejsu GLX.
 Summary:	Header files for VAAPI GLX interface library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki interfejsu GLX VAAPI
 Group:		Development/Libraries
-Requires:	%{name}-glx = %{version}-%{release}
-Requires:	%{name}-x11-devel = %{version}-%{release}
+Requires:	%{name}-glx%{?_isa} = %{version}-%{release}
+Requires:	%{name}-x11-devel%{?_isa} = %{version}-%{release}
 Requires:	OpenGL-GLX-devel
 
 %description glx-devel
@@ -145,7 +145,7 @@ Pliki nagłówkowe biblioteki interfejsu GLX VAAPI.
 Summary:	VAAPI - GLX interface static library
 Summary(pl.UTF-8):	VAAPI - statyczna biblioteka interfejsu GLX
 Group:		Development/Libraries
-Requires:	%{name}-glx-devel = %{version}-%{release}
+Requires:	%{name}-glx-devel%{?_isa} = %{version}-%{release}
 
 %description glx-static
 VAAPI - GLX interface static library.
@@ -157,8 +157,8 @@ VAAPI - statyczna biblioteka interfejsu GLX.
 Summary:	VAAPI - Wayland interface library
 Summary(pl.UTF-8):	VAAPI - biblioteka interfejsu Wayland
 Group:		Libraries
-Requires:	%{name} = %{version}-%{release}
-Requires:	wayland >= 1.11.0
+Requires:	%{name}%{?_isa} = %{version}-%{release}
+Requires:	wayland%{?_isa} >= 1.11.0
 
 %description wayland
 VAAPI - Wayland interface library.
@@ -170,9 +170,9 @@ VAAPI - biblioteka interfejsu Wayland.
 Summary:	Header files for VAAPI Wayland interface library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki interfejsu Wayland VAAPI
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}-%{release}
-Requires:	%{name}-wayland = %{version}-%{release}
-Requires:	wayland-devel >= 1.11.0
+Requires:	%{name}-devel%{?_isa} = %{version}-%{release}
+Requires:	%{name}-wayland%{?_isa} = %{version}-%{release}
+Requires:	wayland-devel%{?_isa} >= 1.11.0
 
 %description wayland-devel
 Header files for VAAPI Wayland interface library.
@@ -184,7 +184,7 @@ Pliki nagłówkowe biblioteki interfejsu Wayland VAAPI.
 Summary:	VAAPI - Wayland interface static library
 Summary(pl.UTF-8):	VAAPI - statyczna biblioteka interfejsu Wayland
 Group:		Development/Libraries
-Requires:	%{name}-wayland-devel = %{version}-%{release}
+Requires:	%{name}-wayland-devel%{?_isa} = %{version}-%{release}
 
 %description wayland-static
 VAAPI - Wayland interface static library.
@@ -196,8 +196,8 @@ VAAPI - statyczna biblioteka interfejsu Wayland.
 Summary:	VAAPI - X11 interface library
 Summary(pl.UTF-8):	VAAPI - biblioteka interfejsu X11
 Group:		Libraries
-Requires:	%{name} = %{version}-%{release}
-Requires:	libdrm >= 2.4.75
+Requires:	%{name}%{?_isa} = %{version}-%{release}
+Requires:	libdrm%{?_isa} >= 2.4.75
 
 %description x11
 VAAPI - X11 interface library.
@@ -209,12 +209,12 @@ VAAPI - biblioteka interfejsu X11.
 Summary:	Header files for VAAPI X11 interface library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki interfejsu X11 VAAPI
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}-%{release}
-Requires:	%{name}-x11 = %{version}-%{release}
-Requires:	libdrm-devel >= 2.4.75
-Requires:	xorg-lib-libX11-devel
-Requires:	xorg-lib-libXext-devel
-Requires:	xorg-lib-libXfixes-devel
+Requires:	%{name}-devel%{?_isa} = %{version}-%{release}
+Requires:	%{name}-x11%{?_isa} = %{version}-%{release}
+Requires:	libdrm-devel%{?_isa} >= 2.4.75
+Requires:	xorg-lib-libX11-devel%{?_isa}
+Requires:	xorg-lib-libXext-devel%{?_isa}
+Requires:	xorg-lib-libXfixes-devel%{?_isa}
 
 %description x11-devel
 Header files for VAAPI X11 interface library.
@@ -226,7 +226,7 @@ Pliki nagłówkowe biblioteki interfejsu X11 VAAPI.
 Summary:	VAAPI - X11 interface static library
 Summary(pl.UTF-8):	VAAPI - statyczna biblioteka interfejsu X11
 Group:		Development/Libraries
-Requires:	%{name}-x11-devel = %{version}-%{release}
+Requires:	%{name}-x11-devel%{?_isa} = %{version}-%{release}
 
 %description x11-static
 VAAPI - X11 interface static library.
