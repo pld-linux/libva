@@ -3,19 +3,19 @@
 %bcond_without	static_libs	# static libraries
 
 %define		va_api_major	1
-%define		va_api_minor	23
+%define		va_api_minor	24
 %define		va_api_micro	0
 
 Summary:	VAAPI (Video Acceleration API)
 Summary(pl.UTF-8):	VAAPI (Video Acceleration API) - API akceleracji filmów
 Name:		libva
-Version:	2.23.0
+Version:	2.24.1
 Release:	1
 License:	MIT
 Group:		Libraries
 #Source0Download: https://github.com/intel/libva/tags
 Source0:	https://github.com/intel/libva/archive/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	826c08e6965d2059e7a6dc98e3292b88
+# Source0-md5:	6de86c7c9d47963108c52a51af9ac191
 URL:		https://github.com/intel/libva
 BuildRequires:	OpenGL-devel
 BuildRequires:	OpenGL-GLX-devel
